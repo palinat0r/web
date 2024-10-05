@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How GCP IAM Works</title>
+    <title>Understanding GCP IAM</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -55,7 +55,9 @@
             border-radius: 8px;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             color: var(--color-accent);
         }
 
@@ -73,6 +75,27 @@
             text-decoration: none;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: var(--color-accent);
+            color: var(--color-dialog);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: var(--color-light);
+        }
+
         .cursor {
             position: absolute;
             width: 20px;
@@ -88,33 +111,51 @@
 </head>
 
 <body>
-    <div class="back-header">How GCP IAM Works</div>
+    <div class="back-header">Understanding GCP IAM</div>
 
     <div class="main">
         <div class="content">
-            <h1>How GCP IAM Works</h1>
-            <p>Google Cloud Platform (GCP) Identity and Access Management (IAM) is one of the core services that controls who can access specific resources on GCP. In this blog, we will explore the structure of GCP IAM, how it works, and best practices to implement it effectively.</p>
+            <h1>Introduction to GCP IAM</h1>
+            <p>I have worked on GCP labs recently, and while learning and capturing more knowledge on GCP, I came to know about IAM, which is one of the building blocks of every cloud platform present out there right now. So here goes the explanation of it.</p>
 
-            <h2>What is GCP IAM?</h2>
-            <p>GCP IAM enables administrators to manage access to cloud resources by defining who can do what. IAM follows the principle of least privilege, where each user is assigned the minimum permissions necessary to fulfill their responsibilities.</p>
+            <h2>What is IAM in General?</h2>
+            <p>For a common understanding, Identity and Access Management (IAM) is basically about who gets the permission to access the cloud and who doesn't. It's very important as it covers the security and cost factor. An important thing to remember here is that cloud services also need these IAM permissions to connect with other services, just like a user or group will require.</p>
 
-            <h3>Key Concepts</h3>
+            <h2>Brief Explanation of IAM</h2>
+            <p>Cloud IAM provides the right tools to manage resource permissions with minimum fuss and high automation. You don’t directly grant users permissions. Instead, you grant them roles, which bundle one or more permissions.</p>
+            <p>This allows you to map job functions within your company to groups and roles. Users get access only to what they need to get the job done, and admins can easily grant default permissions to entire groups of users.</p>
+
+            <h2>Roles, Policies, and Conditions</h2>
+            <p>There are two kinds of roles in Cloud IAM:</p>
             <ul>
-                <li><strong>Roles:</strong> A role is a collection of permissions that can be assigned to a user or service account. GCP has predefined roles like Viewer, Editor, Owner, and custom roles.</li>
-                <li><strong>Policies:</strong> Policies consist of bindings that connect a list of members with a role.</li>
-                <li><strong>Service Accounts:</strong> Service accounts represent non-human users (such as applications) that need access to resources.</li>
+                <li><strong>Predefined Roles:</strong> These roles are maintained by Google and are automatically updated when new features or services are added to Google Cloud.</li>
+                <li><strong>Custom Roles:</strong> These are user-defined roles that allow you to bundle one or more supported permissions to meet your specific needs. You create a custom role by combining one or more of the available Cloud IAM permissions. Permissions allow users to perform specific actions on Google Cloud resources.</li>
             </ul>
 
-            <h3>Best Practices for GCP IAM</h3>
-            <ul>
-                <li>Use predefined roles whenever possible to follow the principle of least privilege.</li>
-                <li>Regularly audit and monitor IAM permissions to avoid over-provisioning of access.</li>
-                <li>Implement multi-factor authentication (MFA) for additional security.</li>
-                <li>Use service accounts for automation processes and assign only the necessary permissions.</li>
-            </ul>
+            <h2>How Google GCP IAM Works: An Example</h2>
+            <p>Think of it like this:</p>
+            <p>A Policy is a collection of bindings.</p>
+            <p>A binding binds one or more members to a single role.</p>
+            <p>Members can be user accounts, service accounts (services also require permissions), groups, and domains (such as G Suite). A role is a named list of permissions; each role can be an IAM predefined role or a user-created custom role.</p>
+            <pre>
+Bindings: [
+  {
+    "role": "...",
+    "members": "...",
+    "condition": {
+                "title": "...",
+                "description": "...",
+                "expression": "..."
+    }
+  },
+  ...
+]</pre>
+            <p>You can see the example here: <a href="https://cloud.google.com/iam/docs/reference/rest/v1/Policy" target="_blank">https://cloud.google.com/iam/docs/reference/rest/v1/Policy</a></p>
+        </div>
 
-            <h2>Conclusion</h2>
-            <p>GCP IAM is a flexible and powerful tool that, when used properly, can help you enforce granular control over who has access to cloud resources. Following best practices ensures your cloud environment stays secure and efficient.</p>
+        <div class="button-container">
+            <a href="index.html" class="button">Home</a>
+            <button id="exitButton" class="button">Exit</button>
         </div>
     </div>
 
@@ -126,6 +167,11 @@
             const cursor = document.getElementById('cursor');
             cursor.style.left = e.pageX + 'px';
             cursor.style.top = e.pageY + 'px';
+        });
+
+        // Add event listener to the Exit button
+        document.getElementById("exitButton").addEventListener("click", function () {
+            window.location.href = "https://cybermap.kaspersky.com/";
         });
     </script>
 </body>
