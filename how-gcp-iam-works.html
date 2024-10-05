@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How GCP IAM Works</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-background: #0000cd;
+            --color-light: #00ffff;
+            --color-accent: #d20000;
+            --color-dialog: #faebd7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', monospace;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-light);
+            height: auto; /* Adjusted for content height */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Changed to flex-start for better layout */
+            align-items: center;
+        }
+
+        .back-header {
+            width: 100%;
+            padding: 16px;
+            text-align: center;
+            font-size: 1.5em;
+            background-color: var(--color-background);
+            border-bottom: 2px solid var(--color-light);
+        }
+
+        .main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .content {
+            background-color: var(--color-dialog);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--color-accent);
+            box-shadow: 10px 10px 0 black;
+            border-radius: 8px;
+        }
+
+        h1, h2, h3 {
+            color: var(--color-accent);
+        }
+
+        p {
+            color: black;
+            margin-bottom: 10px; /* Added margin for better readability */
+        }
+
+        ul {
+            margin-bottom: 10px; /* Added margin for better readability */
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: background 0.3s;
+            z-index: 100;
+            background: rgba(0, 230, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-header">How GCP IAM Works</div>
+
+    <div class="main">
+        <div class="content">
+            <h1>How GCP IAM Works</h1>
+            <p>Google Cloud Platform (GCP) Identity and Access Management (IAM) is one of the core services that controls who can access specific resources on GCP. In this blog, we will explore the structure of GCP IAM, how it works, and best practices to implement it effectively.</p>
+
+            <h2>What is GCP IAM?</h2>
+            <p>GCP IAM enables administrators to manage access to cloud resources by defining who can do what. IAM follows the principle of least privilege, where each user is assigned the minimum permissions necessary to fulfill their responsibilities.</p>
+
+            <h3>Key Concepts</h3>
+            <ul>
+                <li><strong>Roles:</strong> A role is a collection of permissions that can be assigned to a user or service account. GCP has predefined roles like Viewer, Editor, Owner, and custom roles.</li>
+                <li><strong>Policies:</strong> Policies consist of bindings that connect a list of members with a role.</li>
+                <li><strong>Service Accounts:</strong> Service accounts represent non-human users (such as applications) that need access to resources.</li>
+            </ul>
+
+            <h3>Best Practices for GCP IAM</h3>
+            <ul>
+                <li>Use predefined roles whenever possible to follow the principle of least privilege.</li>
+                <li>Regularly audit and monitor IAM permissions to avoid over-provisioning of access.</li>
+                <li>Implement multi-factor authentication (MFA) for additional security.</li>
+                <li>Use service accounts for automation processes and assign only the necessary permissions.</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>GCP IAM is a flexible and powerful tool that, when used properly, can help you enforce granular control over who has access to cloud resources. Following best practices ensures your cloud environment stays secure and efficient.</p>
+        </div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <script>
+        // Track mouse movement to create custom cursor
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+    </script>
+</body>
+
+</html>

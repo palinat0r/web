@@ -1,0 +1,21 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Remove .html extension from URLs
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# Redirect requests for .html URLs to non-.html URLs
+RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+
+# Redirect all 404 errors to index.html
+ErrorDocument 404 /index.html
+
+# Redirect all other server errors (500, 502, etc.) to index.html
+ErrorDocument 500 /index.html
+ErrorDocument 502 /index.html
+ErrorDocument 503 /index.html
+ErrorDocument 504 /index.html
+
+# Redirect all 301 (Moved Permanently) to index.html
+Redirect 301 /old-page.html /index.html

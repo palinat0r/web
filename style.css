@@ -1,0 +1,199 @@
+:root {
+    --color-background: #0000cd;
+    --color-light: #00ffff;
+    --color-accent: #d20000;
+    --color-dialog: #faebd7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+}
+
+body {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.header {
+    position: absolute;
+    color: var(--color-light);
+    font-weight: 600;
+    width: 100%;
+    padding: 8px;
+    border-bottom: 1px solid var(--color-light);
+    top: 0;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 100px); /* Adjust for header and footer */
+    width: 100%;
+    background-color: var(--color-background);
+}
+
+.dialog {
+    position: relative;
+    height: auto;
+    width: 90%;
+    max-width: 600px;
+    background-color: var(--color-dialog);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 26px 26px 0 black;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.wrapper-extrude {
+    position: relative;
+    border-top: 2px white solid;
+    border-left: 2px white solid;
+    border-right: 2px black solid;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding-top: 1rem;
+}
+
+.wrapper-extrude p {
+    position: absolute;
+    color: var(--color-background);
+    font-weight: 600;
+    transform: translateY(calc(-50% - 1rem));
+    background-color: var(--color-dialog);
+}
+
+span {
+    width: 100%;
+    text-align: left;
+}
+
+.option::marker {
+    color: var(--color-accent);
+}
+
+.option:focus,
+.option:hover {
+    color: white;
+    background-color: var(--color-background);
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.controls {
+    height: auto;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+    width: 100%;
+}
+
+.controls .option {
+    position: relative;
+    text-align: center;
+    max-width: 30%;
+    padding: 10px 0;
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 4px;
+}
+
+.controls .option:hover {
+    color: yellow;
+    background-color: var(--color-background);
+}
+
+.wrapper-intrude {
+    position: relative;
+    border-top: 2px black solid;
+    border-left: 2px black solid;
+    border-bottom: 2px white solid;
+    border-right: 2px white solid;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* Cursor Style */
+.cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: background 0.3s;
+    z-index: 100;
+    background: rgba(0, 230, 0, 0.4);
+}
+
+/* Footer Styles */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--color-background);
+    color: var(--color-light);
+    border-top: 1px solid var(--color-light);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        font-size: 1.4em;
+    }
+
+    .dialog {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .controls .option {
+        max-width: 45%;
+        font-size: 0.9em;
+    }
+
+    .option {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        font-size: 1.2em;
+    }
+
+    .dialog {
+        padding: 1rem;
+    }
+
+    .controls .option {
+        max-width: 80%;
+        font-size: 0.8em;
+    }
+}

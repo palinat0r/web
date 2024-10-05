@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pal-sec</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-background: #0000cd;
+            --color-light: #00ffff;
+            --color-accent: #d20000;
+            --color-dialog: #faebd7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', monospace;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-light);
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .back-header {
+            width: 100%;
+            padding: 16px;
+            text-align: center;
+            font-size: 1.5em;
+            background-color: var(--color-background);
+            border-bottom: 2px solid var(--color-light);
+        }
+
+        .main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .blog-card {
+            background-color: var(--color-dialog);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--color-accent);
+            box-shadow: 10px 10px 0 black;
+            transition: background-color 0.3s;
+            border-radius: 8px;
+        }
+
+        .blog-card:hover {
+            background-color: rgba(250, 235, 215, 0.9);
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            margin-bottom: 10px;
+        }
+
+        .blog-excerpt {
+            font-size: 1rem;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .blog-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-bottom: 1px solid transparent;
+        }
+
+        .blog-link:hover {
+            border-bottom: 1px solid var(--color-accent);
+        }
+
+        .cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: background 0.3s;
+            z-index: 100;
+            background: rgba(0, 230, 0, 0.4);
+        }
+
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background-color: var(--color-accent);
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(210, 0, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-header">Offensive Sec Blogs</div>
+
+    <div class="main">
+        <div class="blog-card">
+            <h2 class="blog-title">How GCP IAM Works</h2>
+            <p class="blog-excerpt">Explore the intricacies of Google Cloud Platform's Identity and Access Management (IAM) and understand how it controls access to resources.</p>
+            <a href="how-gcp-iam-works.html" class="blog-link">Read more...</a>
+        </div>
+
+        <div class="blog-card">
+            <h2 class="blog-title">Understanding LLMNR Poisoning: A Deep Dive</h2>
+            <p class="blog-excerpt">Learn about LLMNR poisoning, a common attack vector in network environments, and how it can be exploited.</p>
+            <a href="the-llmnr-poisoning.html" class="blog-link">Read more...</a>
+        </div>
+        
+        <div class="blog-card">
+            <h2 class="blog-title">Common VA/PT Questions Asked in an Interview</h2>
+            <p class="blog-excerpt">Get insights into the most frequently asked questions in Vulnerability Assessment and Penetration Testing interviews.</p>
+            <a href="common-va-pt-questions.html" class="blog-link">Read more...</a>
+        </div>
+
+        <div class="blog-card">
+            <h2 class="blog-title">Deep Dive into CVSS (Common Vulnerability Scoring System): Demystifying CVE-2022–41741 in NGINX ngx_http_mp4_module</h2>
+            <p class="blog-excerpt">Unravel the complexities of CVSS through a real-world example, CVE-2022–41741, and understand its implications in cybersecurity.</p>
+            <a href="Deep-Dive-into-Cvss.html" class="blog-link">Read more...</a>
+        </div>
+
+        <div class="blog-card">
+            <h2 class="blog-title">How I Hacked a Domain Controller Without Tools: A Red Team Case Study</h2>
+            <p class="blog-excerpt">Learn how to leverage misconfigurations and low-privilege accounts to gain control of a Domain Controller without traditional hacking tools.</p>
+            <a href="How-I-Hacked-a-Domain-Controller-Without-Tools.html" class="blog-link">Read more...</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-button">Home</a>
+            <button class="nav-button" id="exitButton">Exit</button>
+        </div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <script>
+        // Track mouse movement to create custom cursor
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+
+        // Add event listener to the Exit button
+        document.getElementById("exitButton").addEventListener("click", function () {
+            window.location.href = "https://cybermap.kaspersky.com/";
+        });
+    </script>
+</body>
+
+</html>

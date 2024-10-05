@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-background: #0000cd;
+            --color-light: #00ffff;
+            --color-accent: #d20000;
+            --color-dialog: #faebd7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+        }
+
+        body {
+            overflow: hidden; /* Prevent scrolling */
+            height: 100vh; /* Set body height to viewport height */
+            width: 100vw; /* Set body width to viewport width */
+        }
+
+        .back-header {
+            position: absolute;
+            color: var(--color-light);
+            font-weight: 600;
+            width: 100%;
+            padding: 8px;
+            border-bottom: 1px solid var(--color-light);
+            top: 0;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .main {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            background-color: var(--color-background);
+        }
+
+        .info {
+            background-color: var(--color-dialog);
+            padding: 20px;
+            box-shadow: 26px 26px 0 black;
+            width: 90%;
+            max-width: 600px;
+            text-align: left;
+            color: black;
+            border-radius: 8px; /* Rounded corners for aesthetics */
+        }
+
+        .info h2 {
+            text-align: center;
+            color: var(--color-light);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: var(--color-accent);
+            color: var(--color-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background-color: darkred; /* Change color on hover */
+        }
+
+        .cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-accent);
+            border-radius: 50%;
+            pointer-events: none; /* Prevent interaction */
+            transition: background 0.3s;
+            z-index: 100; /* Make sure it appears above other elements */
+            background: rgba(0, 230, 0, 0.4);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .back-header {
+                font-size: 1.4em; /* Adjust header size */
+            }
+
+            .info {
+                width: 95%; /* Full width on smaller screens */
+                padding: 1rem; /* Reduced padding for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-header {
+                font-size: 1.2em; /* Further adjust header size */
+            }
+
+            .info {
+                padding: 1rem; /* Increase padding for small devices */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-header">User Information</div>
+
+    <div class="main">
+        <div class="info">
+            <h2>Akshit Pal</h2>
+            <p><strong>Role:</strong> Penetration Tester / Red Teamer</p>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/pal-sec" style="color: var(--color-accent);">pal-sec</a></p>
+            <p><strong>Certifications:</strong> OSCP, CRTE, CARTP, CEH</p>
+            <p><strong>Aspiring Role:</strong> Cloud Security Engineer</p>
+
+            <div class="controls">
+                <button class="button" id="homeButton">Home</button>
+                <button class="button" id="exitButton">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <script>
+        // Track mouse movement to create custom cursor
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+
+        // Add functionality to the buttons
+        document.getElementById('homeButton').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Redirects to the homepage
+        });
+
+        document.getElementById('exitButton').addEventListener('click', () => {
+            window.location.href = 'https://cybermap.kaspersky.com/'; // Redirects to external site
+        });
+    </script>
+</body>
+
+</html>

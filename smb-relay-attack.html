@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple SMB Relay Attack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-background: #0000cd;
+            --color-light: #00ffff;
+            --color-accent: #d20000;
+            --color-dialog: #faebd7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', monospace;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-light);
+            height: auto; /* Adjusted for content height */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Changed to flex-start for better layout */
+            align-items: center;
+        }
+
+        .back-header {
+            width: 100%;
+            padding: 16px;
+            text-align: center;
+            font-size: 1.5em;
+            background-color: var(--color-background);
+            border-bottom: 2px solid var(--color-light);
+        }
+
+        .main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .content {
+            background-color: var(--color-dialog);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--color-accent);
+            box-shadow: 10px 10px 0 black;
+            border-radius: 8px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--color-accent);
+        }
+
+        p {
+            color: black;
+            margin-bottom: 10px; /* Added margin for better readability */
+        }
+
+        ol {
+            margin-bottom: 10px; /* Added margin for better readability */
+        }
+
+        pre {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: var(--color-accent);
+            color: var(--color-dialog);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: var(--color-light);
+        }
+
+        .cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: background 0.3s;
+            z-index: 100;
+            background: rgba(0, 230, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-header">Simple SMB Relay Attack</div>
+
+    <div class="main">
+        <div class="content">
+            <h1>In Summary: Simple SMB Relay Attack Can Help You Get a Shell in Active Directory (AD) Environment</h1>
+            <p>So What is SMB in the first place?</p>
+            <p>Short Answer: The “out of paper” alert you receive on your computer when trying to print a document is the work of the SMB protocol.</p>
+            <p>The Server Message Block (SMB) protocol is a network file sharing protocol that allows applications on a computer to read and write to files and to request services from server programs in a computer network. As one can guess, MITM is possible here, granted you are in the network.</p>
+
+            <h2>How Does It Work?</h2>
+            <p>Well, you need three things for an SMB relay attack:</p>
+            <ol>
+                <li><strong>Network Access:</strong> You must be in the network.</li>
+                <li><strong>Responder.py and ntlmrelayx.py:</strong> These tools are essential.</li>
+                <li><strong>A Victim with SMB Signing Disabled:</strong> This is crucial for the attack.</li>
+            </ol>
+
+            <h2>5 Simple Steps to Gain Shell from SMB Relay Attack</h2>
+            <h3>Step 1:</h3>
+            <p>First, we need to discover a target whose SMB signing is disabled. Enabled but necessary also works fine. Use the old trusted Nmap to discover that:</p>
+            <pre><code>nmap script=smb2-security-mode.nse -p 445 192.168.57.0/24</code></pre>
+
+            <h3>Step 2:</h3>
+            <p>Put those in our <strong>targets.txt</strong> so that we can use them with ntlmrelayx.py. Remember to turn off HTTP and SMB servers from the config for Responder before running the command:</p>
+            <pre><code>responder -I eth0 -rdwv</code></pre>
+
+            <h3>Step 3:</h3>
+            <p>Run the ntlmrelayx.py on <strong>targets.txt</strong> with the <strong>-i</strong> flag to get the interactive shell:</p>
+            <pre><code>ntlmrelayx.py -tf targets.txt -smb2support -i</code></pre>
+
+            <h3>Step 4:</h3>
+            <p>Wait for a victim request. On the victim side, it will look like this:</p>
+            <p><strong>And voila! You will get the SMB shell. It will look something like this on your side:</strong></p>
+
+            <h3>Step 5:</h3>
+            <p>Get the shell on netcat via the address you get. Alternatively, you can also get a Meterpreter shell with a few tweaks.</p>
+
+            <p>That's it! Now go around and do what you like; you can write or read files with this shell and do much more.</p>
+        </div>
+
+        <div class="button-container">
+            <a href="blogs.html" class="button">Home</a>
+            <button id="exitButton" class="button">Exit</button>
+        </div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <script>
+        // Track mouse movement to create custom cursor
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+
+        // Add event listener to the Exit button
+        document.getElementById("exitButton").addEventListener("click", function () {
+            window.location.href = "https://cybermap.kaspersky.com/";
+        });
+    </script>
+</body>
+
+</html>

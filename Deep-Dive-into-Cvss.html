@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive into CVSS: CVE-2022–41741 in NGINX ngx_http_mp4_module</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-background: #0000cd;
+            --color-light: #00ffff;
+            --color-accent: #d20000;
+            --color-dialog: #faebd7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', monospace;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-light);
+            height: auto; /* Adjusted for content height */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Changed to flex-start for better layout */
+            align-items: center;
+        }
+
+        .back-header {
+            width: 100%;
+            padding: 16px;
+            text-align: center;
+            font-size: 1.5em;
+            background-color: var(--color-background);
+            border-bottom: 2px solid var(--color-light);
+        }
+
+        .main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .content {
+            background-color: var(--color-dialog);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--color-accent);
+            box-shadow: 10px 10px 0 black;
+            border-radius: 8px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--color-accent);
+        }
+
+        p {
+            color: black;
+            margin-bottom: 10px; /* Added margin for better readability */
+        }
+
+        ul {
+            margin-bottom: 10px; /* Added margin for better readability */
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: var(--color-accent);
+            color: var(--color-dialog);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: var(--color-light);
+        }
+
+        .cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: background 0.3s;
+            z-index: 100;
+            background: rgba(0, 230, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-header">Deep Dive into CVSS: CVE-2022–41741 in NGINX ngx_http_mp4_module</div>
+
+    <div class="main">
+        <div class="content">
+            <h1>CVSS</h1>
+            <p>In the intricate landscape of cybersecurity, CVSS emerges as a beacon, providing a standardized approach to assessing vulnerabilities. In this article, we unravel the complexities of CVSS by delving into the details of a real-world example: CVE-2022–41741 in NGINX ngx_http_mp4_module.</p>
+
+            <h2>Understanding CVE-2022–41741</h2>
+            <p>This vulnerability in NGINX’s ngx_http_mp4_module potentially allows a local attacker to corrupt NGINX worker memory. The consequences could range from termination to other severe impacts when processing specifically crafted audio or video files.</p>
+
+            <h2>CVSS Scores:</h2>
+            <ul>
+                <li><strong>CVSS v3.1 Base Score:</strong> 7.0 (High)</li>
+                <li><strong>CVSS v4.0 Base Score:</strong> 7.3 (High)</li>
+            </ul>
+
+            <h2>CVSS Metrics (v4.0):</h2>
+            <p>Let’s break down the granular details of the CVSS metrics for CVE-2022–41741:</p>
+
+            <h3>Attack Vector: Local</h3>
+            <p>The attack vector denotes how an attacker accesses the vulnerable system. In this case, the vector is local, meaning the attacker must have physical or logical access to the system. This implies that the attacker needs to be present on the affected machine, limiting the risk to internal threats.</p>
+
+            <h3>Attack Complexity: Low</h3>
+            <p>Attack complexity gauges the level of difficulty an attacker faces in exploiting the vulnerability. A low complexity rating suggests that no specialized conditions or advanced knowledge are required. In the context of CVE-2022–41741, the attack is straightforward, requiring no advanced techniques.</p>
+
+            <h3>Attack Requirements: Present</h3>
+            <p>This metric signifies the prerequisites for a successful exploit. For this vulnerability, NGINX must be built with the ngx_http_mp4_module, and the configuration must be present. Importantly, these are not default scenarios for an NGINX OSS web server, mitigating the risk for default configurations.</p>
+
+            <h3>Privileges Required: Low</h3>
+            <p>The privileges required metric assesses the level of access an attacker needs. A low rating indicates that an attacker only requires basic privileges, such as the ability to place a file within the web root. This implies that the attack can be executed with relatively minimal permissions.</p>
+
+            <h3>User Interaction: None</h3>
+            <p>User interaction denotes whether the attacker needs to interact with a user to successfully exploit the vulnerability. In this case, no user interaction is required, making the attack more covert and potentially more dangerous.</p>
+
+            <h2>Benefits of CVSS:</h2>
+            <ul>
+                <li>Prioritization: CVSS aids in prioritizing vulnerabilities, ensuring that the most critical issues are addressed first.</li>
+                <li>Resource Allocation: Efficient allocation of resources by focusing on vulnerabilities with the greatest potential impact.</li>
+                <li>Risk Communication: Provides a standardized method for assessing and communicating risk, fostering informed decision-making.</li>
+                <li>Mitigation Strategies: Helps in planning and implementing effective mitigation strategies based on the severity of the vulnerability.</li>
+            </ul>
+
+            <p>In the ever-evolving realm of cybersecurity, CVSS stands as a vital tool for organizations to navigate the labyrinth of vulnerabilities. Understanding the nuances of CVE-2022–41741 illuminates not only the specific risks associated with this NGINX vulnerability but also the broader principles of CVSS scoring.</p>
+
+            <p>References: 
+                <a href="https://www.first.org/cvss/v4.0/examples" target="_blank">CVSS Examples</a>, 
+                <a href="https://www.first.org/cvss/" target="_blank">CVSS Home</a>, 
+                <a href="https://learn.first.org/index" target="_blank">Learn CVSS</a>
+            </p>
+        </div>
+
+        <div class="button-container">
+            <a href="blogs.html" class="button">Home</a>
+            <button id="exitButton" class="button">Exit</button>
+        </div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+
+    <script>
+        // Track mouse movement to create custom cursor
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+
+        // Add event listener to the Exit button
+        document.getElementById("exitButton").addEventListener("click", function () {
+            window.location.href = "https://cybermap.kaspersky.com/";
+        });
+    </script>
+</body>
+
+</html>
